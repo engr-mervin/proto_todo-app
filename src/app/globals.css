@@ -1,5 +1,13 @@
-.html {
-  font-size: 62.5%;
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+li {
+  padding: 2rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
 }
 
 /*# sourceMappingURL=globals.css.map */

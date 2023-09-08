@@ -1,0 +1,10 @@
+@mixin cards_parent {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@mixin cards_children {
+  padding: 2rem;
+  box-shadow: 0 0 1rem rgba(black, 0.15);
+}

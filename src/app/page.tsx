@@ -9,27 +9,26 @@ const Home = function () {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [deadline, setDeadline] = useState<string>("");
 
+  const getTodos = async function () {
+    const response = await fetch("/api/todo");
+
+    const data = await response.json();
+
+    const todos = data.todos as Todo[];
+
+    setTodos(todos);
+  };
+
   useEffect(() => {
-    const getTodos = async function () {
-      const response = await fetch("/api/todo");
-
-      const data = await response.json();
-
-      const todos = data.todos as Todo[];
-
-      setTodos(todos);
-    };
-
     getTodos();
-  });
+  }, []);
 
   const deleteTodo = async function (id: string) {
-    const response = await fetch(`/api/todo/${id}`, {
+    await fetch(`/api/todo/${id}`, {
       method: "DELETE",
     });
 
-    const body = await response.json();
-    console.log(body);
+    getTodos();
   };
 
   const sendTodo = async function (e: React.FormEvent<HTMLFormElement>) {
@@ -42,10 +41,12 @@ const Home = function () {
     body.append("priority", priority);
     body.append("deadline", deadline);
 
-    const response = await fetch("/api/todo", {
+    await fetch("/api/todo", {
       method: "POST",
       body,
     });
+
+    getTodos();
   };
   return (
     <>
